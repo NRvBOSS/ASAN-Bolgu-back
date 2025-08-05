@@ -1,9 +1,14 @@
 import { Module } from '@nestjs/common';
 import { VolunteersService } from './volunteers.service';
 import { VolunteersController } from './volunteers.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Volunteer } from '../entities/volunteer.entity';
 
 @Module({
+  imports: [
+    TypeOrmModule.forFeature([Volunteer]),
+  ],
   providers: [VolunteersService],
   controllers: [VolunteersController]
 })
-export class VolunteersModule {}
+export class VolunteersModule { }
