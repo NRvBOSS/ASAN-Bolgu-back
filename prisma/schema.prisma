@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  // uncomment next line if you use Prisma <5.10
+  // directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+model Volunteer {
+  id          String        @id @default(cuid())
+  name        String
+  gender      String
+  history     String[]      @default([])
+  createdAt   DateTime      @default(now())
+  Bolusdurmek Bolusdurmek[]
+}
+
+model Assignment {
+  id          String        @id
+  name        String
+  sitting     Boolean       @default(true)
+  Bolusdurmek Bolusdurmek[]
+}
+
+model Bolusdurmek {
+  id           String     @id
+  volunteerId  String
+  assignmentId String
+  volunteer    Volunteer  @relation(fields: [volunteerId], references: [id])
+  assignment   Assignment @relation(fields: [assignmentId], references: [id])
+}

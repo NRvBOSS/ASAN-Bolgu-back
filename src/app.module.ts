@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { VolunteersModule } from './volunteers/volunteers.module';
 import { AssignmentsModule } from './assignments/assignments.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true,
     }),
     VolunteersModule,
-    AssignmentsModule
+    AssignmentsModule,
+    PrismaModule
   ],
   controllers: [],
   providers: [],
