@@ -1,6 +1,4 @@
 const Volunteer = require("../models/volunteerModels");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const {
   volunteerValidationSchema,
 } = require("../validation/volunteerValidation");
@@ -32,7 +30,6 @@ const addVolunteer = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "Error adding volunteer", error });
   }
-  ss;
 };
 
 module.exports = {

@@ -6,14 +6,13 @@ const activitySchema = new Schema(
     name: {
       type: String,
       required: true,
-      trim: true,
     },
-    participants: [
-      {
-        type: String,
-        trim: true,
-      },
-    ],
+    // participants: [
+    //   {
+    //     type: String,
+    //     trim: true,
+    //   },
+    // ],
   },
   {
     timestamps: true,
