@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 
 // routes
 app.use("/api/volunteers", volunteerRoutes);
-app.use("/api/activities", activityRoutes);
+// app.use("/api/activities", activityRoutes);
 
 // connecting to db
 mongoose
