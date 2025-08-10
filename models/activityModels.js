@@ -7,12 +7,17 @@ const activitySchema = new Schema(
       type: String,
       required: true,
     },
-    // participants: [
-    //   {
-    //     type: String,
-    //     trim: true,
-    //   },
-    // ],
+    participants: [
+      {
+        type: String,
+        trim: true,
+      },
+    ],
+    type: {
+      type: String,
+      required: true,
+      enum: ["sitting", "standing"],
+    },
   },
   {
     timestamps: true,

@@ -32,7 +32,18 @@ const addVolunteer = async (req, res) => {
   }
 };
 
+// Delete all volunteers
+const delAllVol = async (req, res) => {
+  try {
+    await Volunteer.deleteMany({});
+    res.status(200).json({ message: "All volunteers deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting volunteers", error });
+  }
+};
+
 module.exports = {
   getAllVolunteers,
   addVolunteer,
+  delAllVol
 };

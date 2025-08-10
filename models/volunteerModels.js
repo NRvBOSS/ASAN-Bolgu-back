@@ -12,6 +12,10 @@ const volunteerSchema = new Schema(
       // required: true,
       enum: ["man", "woman"],
     },
+    rest:{
+      type: Date,
+      required: true
+    }
   },
   { timestamps: true }
 );
