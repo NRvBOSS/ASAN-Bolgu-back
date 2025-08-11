@@ -9,13 +9,33 @@ const volunteerSchema = new Schema(
     },
     gender: {
       type: String,
-      // required: true,
-      enum: ["man", "woman"],
+      required: true,
+      enum: ["kişi", "qadın"],
     },
-    rest:{
-      type: Date,
-      required: true
-    }
+    rest: {
+      type: String,
+      enum: [
+        "bazar ertəsi",
+        "çərşənbə axşamı",
+        "çərşənbə",
+        "cümə axşamı",
+        "cümə",
+        "şənbə",
+        "bazar",
+      ],
+      required: false,
+    },
+    role: {
+      type: String,
+      required: true,
+      enum: ["könüllü", "sorğu rəhbəri", "qrup rəhbəri", "digər"],
+      default: "könüllü",
+    },
+    period: {
+      type: String,
+      required: true,
+      enum: ["1", "2", "3"],
+    },
   },
   { timestamps: true }
 );

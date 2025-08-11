@@ -19,9 +19,9 @@ const addVolunteer = async (req, res) => {
   if (error) {
     return res.status(400).json({ message: error.details[0].message });
   }
-  const { name, gender } = req.body;
+  const { name, gender, rest, role, period } = req.body;
   try {
-    const newVolunteer = new Volunteer({ name, gender });
+    const newVolunteer = new Volunteer({ name, gender, rest, role, period });
     await newVolunteer.save();
     res.status(201).json({
       message: "Volunteer added successfully",
@@ -45,5 +45,5 @@ const delAllVol = async (req, res) => {
 module.exports = {
   getAllVolunteers,
   addVolunteer,
-  delAllVol
+  delAllVol,
 };

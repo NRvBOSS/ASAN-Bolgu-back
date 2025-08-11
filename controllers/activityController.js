@@ -25,7 +25,22 @@ const addActivity = async (req, res) => {
   }
 };
 
+// Delete activity by ID
+const delActivity = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const activity = await Activity.findByIdAndDelete(id);
+    if (!activity) {
+      return res.status(404).json({ message: "Activity not found" });
+    }
+    res.status(200).json({ message: "Activity deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting activity", error });
+  }
+};
+
 module.exports = {
   addActivity,
   getAllActivities,
+  delActivity
 };
