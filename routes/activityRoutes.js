@@ -3,6 +3,7 @@ const {
   getAllActivities,
   addActivity,
   delActivity,
+  updAct,
 } = require("../controllers/activityController");
 
 // Get all activities
@@ -13,5 +14,8 @@ router.post("/", addActivity);
 
 // Delete activity by ID
 router.delete("/:id", delActivity);
+
+// Update activity by ID
+router.patch("/:id", updAct);
 
 module.exports = router;

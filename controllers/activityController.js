@@ -12,9 +12,9 @@ const getAllActivities = async (req, res) => {
 
 // Add a new activity
 const addActivity = async (req, res) => {
-  const { name } = req.body;
+  const { name, type } = req.body;
   try {
-    const newActivity = new Activity({ name });
+    const newActivity = new Activity({ name, type });
     await newActivity.save();
     res.status(201).json({
       message: "Activity added successfully",
@@ -39,8 +39,28 @@ const delActivity = async (req, res) => {
   }
 };
 
+// Update activity by ID
+const updAct = async (req, res) => {
+  const { id } = req.params;
+  const { name, type } = req.body;
+  try {
+    const activity = await Activity.findByIdAndUpdate(
+      id,
+      { name, type },
+      { new: true }
+    );
+    if (!activity) {
+      return res.status(404).json({ message: "Activity not found" });
+    }
+    res.status(200).json({ message: "Activity updated successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting activity", error });
+  }
+};
+
 module.exports = {
   addActivity,
   getAllActivities,
-  delActivity
+  delActivity,
+  updAct,
 };
