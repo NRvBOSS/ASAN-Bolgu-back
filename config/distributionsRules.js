@@ -1,4 +1,3 @@
-// config/distributionRules.js
 module.exports = {
   activities: {
     bagca: {
@@ -27,7 +26,6 @@ module.exports = {
       type: "oturaqli",
       gender: ["man", "woman"],
       limit: 2,
-      exclusiveForDay: true, // bu gün başqa fəaliyyət olmaz
     },
     masa: {
       type: "oturaqli",

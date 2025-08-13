@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
 const volunteerSchema = new Schema(
   {
     name: {
@@ -36,6 +35,14 @@ const volunteerSchema = new Schema(
       required: true,
       enum: ["1", "2", "3"],
     },
+    // YENİ SAHƏ
+    activityHistory: [
+      {
+        activity: String,
+        period: String,
+        date: { type: Date, default: Date.now },
+      },
+    ],
   },
   { timestamps: true }
 );
