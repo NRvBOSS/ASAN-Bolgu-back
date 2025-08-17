@@ -6,6 +6,7 @@ const cors = require("cors");
 const volunteerRoutes = require("./routes/volunteerRoutes");
 const activityRoutes = require("./routes/activityRoutes");
 const distributeRoutes = require("./routes/distributeRoutes");
+const historyRoutes = require("./routes/historyRoutes");
 
 // Express app
 const app = express();
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
 app.use("/api/volunteers", volunteerRoutes);
 app.use("/api/activities", activityRoutes);
 app.use("/api/distribute", distributeRoutes);
+app.use("/api/history", historyRoutes);
 
 // connecting to db
 mongoose
