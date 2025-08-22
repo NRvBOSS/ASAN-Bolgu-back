@@ -7,6 +7,7 @@ const volunteerRoutes = require("./routes/volunteerRoutes");
 const activityRoutes = require("./routes/activityRoutes");
 const distributeRoutes = require("./routes/distributeRoutes");
 const historyRoutes = require("./routes/historyRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 // Express app
 const app = express();
@@ -24,6 +25,7 @@ app.use("/api/volunteers", volunteerRoutes);
 app.use("/api/activities", activityRoutes);
 app.use("/api/distribute", distributeRoutes);
 app.use("/api/history", historyRoutes);
+app.use("/api/users", userRoutes);
 
 // connecting to db
 mongoose
