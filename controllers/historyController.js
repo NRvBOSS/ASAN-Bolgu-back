@@ -29,27 +29,46 @@ const saveDistribution = async (req, res) => {
   }
 };
 
-// Tarixə görə tarixçəni gətir
+// Tarixə görə tarixçəni gətir (frontendə uyğun formatda)
 const getHistoryByDate = async (req, res) => {
   try {
-    const { date } = req.query; // ?date=2025-08-17 kimi
+    const { date } = req.query;
     if (!date) {
-      return res.status(400).json({ message: "Tarix göndərilməyib" });
+      return res.status(400).json({
+        success: false,
+        message: "Tarix göndərilməyib",
+      });
     }
 
+    // Tarix aralığını təyin et (günün əvvəlindən axşamadək)
     const start = new Date(date);
     const end = new Date(date);
     end.setHours(23, 59, 59, 999);
 
+    // Verilənləri bazadan al
     const history = await DistributionHistory.findOne({
       date: { $gte: start, $lte: end },
-    });
+    }).lean();
 
     if (!history) {
-      return res
-        .status(404)
-        .json({ message: "Bu tarix üçün məlumat tapılmadı" });
+      return res.status(200).json({
+        success: true,
+        date: date,
+        message: "Bu tarix üçün məlumat tapılmadı",
+        data: null,
+      });
     }
+
+    // Frontend üçün optimal formatda verilənləri hazırla
+    const formattedData = {
+      success: true,
+      date: history.date.toISOString(),
+      assignments: history.assignments.map((assignment) => ({
+        activity: assignment.activity,
+        volunteers: assignment.volunteers || [], // Hər fəaliyyət üçün könüllülər
+      })),
+      message: "Tarixçə uğurla alındı",
+    };
 
     res.json(history);
   } catch (error) {

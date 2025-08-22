@@ -18,7 +18,7 @@ const volunteerValidationSchema = Joi.object({
     .optional(), // istəsən göndər, istəməsən yox
 
   role: Joi.string()
-    .valid("könüllü", "sorğu rəhbəri", "qrup rəhbəri", "digər")
+    .valid("könüllü", "sorğu rəhbəri", "qrup rəhbəri", "digər", "Hüquq")
     .default("könüllü"),
 
   period: Joi.string().valid("1", "2", "3").required(),

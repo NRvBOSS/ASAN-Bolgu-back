@@ -4,11 +4,11 @@ const volunteerSchema = new Schema(
   {
     name: {
       type: String,
-      required: true,
+      // required: true,
     },
     gender: {
       type: String,
-      required: true,
+      // required: true,
       enum: ["kişi", "qadın"],
     },
     rest: {
@@ -27,7 +27,7 @@ const volunteerSchema = new Schema(
     role: {
       type: String,
       required: true,
-      enum: ["könüllü", "sorğu rəhbəri", "qrup rəhbəri", "digər"],
+      enum: ["könüllü", "sorğu rəhbəri", "qrup rəhbəri", "digər", "Hüquq"],
       default: "könüllü",
     },
     period: {
@@ -35,14 +35,6 @@ const volunteerSchema = new Schema(
       required: true,
       enum: ["1", "2", "3"],
     },
-    // YENİ SAHƏ
-    activityHistory: [
-      {
-        activity: String,
-        period: String,
-        date: { type: Date, default: Date.now },
-      },
-    ],
   },
   { timestamps: true }
 );
