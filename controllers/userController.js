@@ -1,14 +1,17 @@
 const User = require("../models/userModels");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { loginValidationSchema } = require("../validation/userValidation");
 
-// POST a new user
+// Create a new user
 const createUser = async (req, res) => {
   const { name, email, password, pin } = req.body;
+
   try {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const newUser = new User.create({
+    const newUser = await User.create({
       name,
       email,
       password: hashedPassword,
@@ -19,7 +22,18 @@ const createUser = async (req, res) => {
       volunteer: newUser,
     });
   } catch (error) {
+    console.error("Error creating user:", error);
     res.status(500).json({ message: "Error creating user", error });
+  }
+};
+
+// Get all user
+const getAllUser = async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch users" });
   }
 };
 
@@ -55,7 +69,35 @@ const loginUser = async (req, res) => {
   }
 };
 
+// Check pin
+const checkPin = async (req, res) => {
+  try {
+    const { pin } = req.body.pin;
+
+    if (req.user.pin !== pin) {
+      return res.status(400).json({ error: "Invalid pin" });
+    }
+
+    res.status(200).json({ message: "Pin verified successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to verify pin" });
+  }
+};
+
+// Delete all users
+const deleteUser = async (req, res) => {
+  try {
+    await User.deleteMany({});
+    res.status(200).json({ message: "All users deleted" });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete users" });
+  }
+};
+
 module.exports = {
+  getAllUser,
   createUser,
   loginUser,
+  deleteUser,
+  checkPin,
 };
